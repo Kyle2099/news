@@ -3,14 +3,8 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var path = require("path");
+require("dotenv").config();
 
-
-// var html = require(express-handlebars);
-
-
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
 var request = require("request");
 var cheerio = require("cheerio");
 
