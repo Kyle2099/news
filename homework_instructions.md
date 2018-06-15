@@ -5,7 +5,7 @@
 In this assignment, you'll create a web app that lets users view and leave comments on the latest news. But you're not going to actually write any articles; instead, you'll flex your Mongoose and Cheerio muscles to scrape news from another site.
 
 ### Before You Begin
-
+<!-- VERY IMPORTANT use these packages -->
 1. Create a GitHub repo for this assignment and clone it to your computer. Any name will do -- just make sure it's related to this project in some fashion.
 
 2. Run `npm init`. When that's finished, install and save these npm packages:
@@ -25,7 +25,7 @@ In this assignment, you'll create a web app that lets users view and leave comme
 9. **NOTE**: If you want to earn complete credit for your work, you must use all six of these packages in your assignment.
 
 
-<!-- Still need todo -->
+<!-- Still need todo VERY IMPORTANT -->
 10. In order to deploy your project to Heroku, you must set up an mLab provision. mLab is remote MongoDB database that Heroku supports natively. Follow these steps to get it running:
 
 11. Create a Heroku app in your project directory.
@@ -58,12 +58,12 @@ mongoose.connect(MONGODB_URI);
 
 * Please submit both the deployed Github.io link to your homework AND the link to the Github Repository!
 
-## Instructions
+<!-- ## Instructions  what the user exp. is looking for.  -->
 
 * Create an app that accomplishes the following:
 
   1. Whenever a user visits your site, the app should scrape stories from a news outlet of your choice and display them for the user. Each scraped article should be saved to your application database. At a minimum, the app should scrape and display the following information for each article:
-
+<!-- HTML AND CSS -->
      * Headline - the title of the article
 
      * Summary - a short summary of the article
@@ -86,13 +86,13 @@ mongoose.connect(MONGODB_URI);
 
   * If your app deletes stories every time someone visits, your users won't be able to see any comments except the ones that they post.
 
-### Helpful Links
+<!-- ### Helpful Links - Need help? -->
 
 * [MongoDB Documentation](https://docs.mongodb.com/manual/)
 * [Mongoose Documentation](http://mongoosejs.com/docs/api.html)
 * [Cheerio Documentation](https://github.com/cheeriojs/cheerio)
 
-### Reminder: Submission on BCS
+### Reminder: Submission on BootCamp Spot
 
 * Please submit both the deployed Github.io link to your homework AND the link to the Github Repository!
 
@@ -101,7 +101,7 @@ mongoose.connect(MONGODB_URI);
 ### Minimum Requirements
 
 Attempt to complete homework assignment as described in instructions. If unable to complete certain portions, please pseudocode these portions to describe what remains to be completed. Hosting on Heroku and adding a README.md are required for this homework. In addition, add this homework to your portfolio, more information can be found below.
-
+<!-- use this part if I do not finish -->
 ---
 
 ### Hosting on Heroku
@@ -113,7 +113,7 @@ Please see [Heroku’s Account Verification Information](https://devcenter.herok
 ---
 
 ### Create a README.md
-
+<!--  when creating a READ.me file incorpurate photos of the application -->
 Add a `README.md` to your repository describing the project. Here are some resources for creating your `README.md`. Here are some resources to help you along the way:
 
 * [About READMEs](https://help.github.com/articles/about-readmes/)
@@ -123,13 +123,13 @@ Add a `README.md` to your repository describing the project. Here are some resou
 ---
 
 ### Add To Your Portfolio
-
+<!-- Update Profolio -->
 After completing the homework please add the piece to your portfolio. Make sure to add a link to your updated portfolio in the comments section of your homework so the TAs can easily ensure you completed this step when they are grading the assignment. To receive an 'A' on any assignment, you must link to it from your portfolio.
 
 ---
 
 ### One Last Thing
-
+<!-- Extra Help? -->
 If you have any questions about this project or the material we have covered, please post them in the community channels in slack so that your fellow developers can help you! If you're still having trouble, you can come to office hours for assistance from your instructor and TAs.
 
 That goes threefold for this week: MongoDB and Mongoose compose a challenging data management system. If there's anything you find confusing about these technologies, don't hesitate to speak with someone from the Bootcamp team.

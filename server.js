@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+// var html = require(express-handlebars);
 
 
 // Our scraping tools
@@ -35,39 +36,43 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
-  axios.get("http://www.echojs.com/").then(function(response) {
+  request("https://www.reddit.com/r/programing/", function(err, response, html) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
-
+    var $ = cheerio.load(html);
+    // console.log($);
     // Now, we grab every h2 within an article tag, and do the following:
-    $("article h2").each(function(i, element) {
+    $("p").each(function(i, element) {
       // Save an empty result object
+console.log($(element).text());
+    
+    
       var result = {};
-
+      // "h2.k202r0-0"
       // Add the text and href of every link, and save them as properties of the result object
-      result.title = $(this)
-        .children("a")
-        .text();
-      result.link = $(this)
-        .children("a")
-        .attr("href");
+      // result.title = $(this)
+      //   .children("a")
+      //   .text();
+      // result.link = $(this)
+      //   .children("a")
+      //   .attr("href");
 
       // Create a new Article using the `result` object built from scraping
-      db.Article.create(result)
-        .then(function(dbArticle) {
-          // View the added result in the console
-          console.log(dbArticle);
-        })
-        .catch(function(err) {
-          // If an error occurred, send it to the client
-          return res.json(err);
-        });
+      // db.Article.create(result)
+      //   .then(function(dbArticle) {
+      //     // View the added result in the console
+      //     console.log(dbArticle);
+      //   })
+      //   .catch(function(err) {
+      //     // If an error occurred, send it to the client
+      //     return res.json(err);
+        // });
     });
 
     // If we were able to successfully scrape and save an Article, send a message to the client
     res.send("Scrape Complete");
   });
 });
+
 
 // Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
