@@ -2,6 +2,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var path = require("path");
+
+
 // var html = require(express-handlebars);
 
 
@@ -18,7 +21,7 @@ var PORT = 3000;
 
 // Initialize Express
 var app = express();
-
+app.set('view engine', 'html');
 // Configure middleware
 
 // Use morgan logger for logging requests
@@ -31,41 +34,45 @@ app.use(express.static("public"));
 // Connect to the Mongo DB
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI, {
+    
+});
 // Routes
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
-  request("https://www.reddit.com/r/programing/", function(err, response, html) {
+  request("https://www.reddit.com/r/programming/", function(err, response, html) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(html);
     // console.log($);
     // Now, we grab every h2 within an article tag, and do the following:
-    $("p").each(function(i, element) {
+    $(".Post article").each(function(i, element) {
       // Save an empty result object
-console.log($(element).text());
-    
+// console.log($(element).text());
     
       var result = {};
-      // "h2.k202r0-0"
-      // Add the text and href of every link, and save them as properties of the result object
-      // result.title = $(this)
-      //   .children("a")
-      //   .text();
-      // result.link = $(this)
-      //   .children("a")
-      //   .attr("href");
 
+    
+      // Add the text and href of every link, and save them as properties of the result object
+      result.title = $(element)
+        .find(".SQnoC3ObvgnGjWt90zD9Z h2")
+        .text();
+      result.link = $(element)
+        .find(".SQnoC3ObvgnGjWt90zD9Z")
+        .attr("href");
+      console.log(result);
       // Create a new Article using the `result` object built from scraping
-      // db.Article.create(result)
-      //   .then(function(dbArticle) {
-      //     // View the added result in the console
-      //     console.log(dbArticle);
-      //   })
-      //   .catch(function(err) {
-      //     // If an error occurred, send it to the client
-      //     return res.json(err);
-        // });
+      db.Article.create(result)
+        .then(function(dbArticle) {
+          // View the added result in the console
+          console.log(dbArticle);
+        })
+        .catch(function(err) {
+          // If an error occurred, send it to the client
+          return res.json(err);
+        });
     });
 
     // If we were able to successfully scrape and save an Article, send a message to the client
@@ -123,6 +130,10 @@ app.post("/articles/:id", function(req, res) {
       res.json(err);
     });
 });
+
+app.get("/", function(req, res) {
+      res.sendFile(path.join(__dirname, "./public/home.html"));
+  });
 
 // Start the server
 app.listen(PORT, function() {
